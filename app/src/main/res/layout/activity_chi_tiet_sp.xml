@@ -231,7 +231,7 @@
             <Button
                 android:id="@+id/btnMua"
                 android:background="#ec8094"
-                android:layout_width="220dp"
+                android:layout_width="240dp"
                 android:layout_height="match_parent"
                 android:text="Mua ngay"/>
         </LinearLayout>
