@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
         searchView = findViewById(R.id.searchView);
         searchView.setQueryHint("Tìm kiếm sản phẩm");
         mangSP = new ArrayList<>();
-        sanPhamAdapter=new SanPhamAdapter(getApplicationContext(), mangSP);
+        sanPhamAdapter=new SanPhamAdapter(getApplicationContext(), mangSP,R.layout.dong_sanpham_moinhat);
         recyclerViewManHinhChinh.setHasFixedSize(true);
         recyclerViewManHinhChinh.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         recyclerViewManHinhChinh.setAdapter(sanPhamAdapter);

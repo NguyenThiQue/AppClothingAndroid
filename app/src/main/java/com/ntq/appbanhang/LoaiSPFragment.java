@@ -48,13 +48,6 @@ public class LoaiSPFragment extends Fragment {
         listLoaiSP = new ArrayList<>();
         adapterLoai = new LoaiSanPhamAdapter(this.getContext(), R.layout.item_loaisp, listLoaiSP);
         getDataLoaiSP();
-//        if (CheckConnection.isConnected(getContext())) {
-//            CheckConnection.ShowToast_Short(getContext(),"trước");
-//            getDataLoaiSP();
-//            CheckConnection.ShowToast_Short(getContext(),listLoaiSP.toString());
-//        } else {
-//            CheckConnection.ShowToast_Short(getContext(), "Bạn hãy kiểm tra lại kết nối Internet");
-//        }
 
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
         searchLoai = view.findViewById(R.id.searchLoai);

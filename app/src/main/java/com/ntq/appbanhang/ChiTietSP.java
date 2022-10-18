@@ -37,6 +37,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
+import com.nex3z.notificationbadge.NotificationBadge;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,9 +56,11 @@ public class ChiTietSP extends AppCompatActivity {
     TextView txtTenSPCT, txtGiaSPCT, txtGiaSaleSPCT;
     ImageView imvStarCTSP1, imvStarCTSP2, imvStarCTSP3, imvStarCTSP4, imvStarCTSP5, imvhHearCTSP;
     ImageButton imvbtnGioHang;
+    NotificationBadge notificationBadge;
     TextView txtMota, txtSold;
     ArrayList<SanPham> mangSP;
     SanPhamAdapter sanPhamAdapter;
+    SanPham sp;
     Button btnBackCTSP,btnDecrease, btnIncrease, btnAmoutProduct, btnMua;
     SearchView searchViewCTSP;
     int count =0;
@@ -163,7 +166,7 @@ public class ChiTietSP extends AppCompatActivity {
         String HeartChiTiet = "";
         String Sold = "";
         int IdSP = 0;
-        SanPham sp = (SanPham) getIntent().getSerializableExtra("chitiet");
+        sp = (SanPham) getIntent().getSerializableExtra("chitiet");
         ID = sp.getID();
         tenChiTiet = sp.getTenSP();
         giaSPChiTiet = sp.getGiaSP();
@@ -235,6 +238,14 @@ public class ChiTietSP extends AppCompatActivity {
         txtSold = findViewById(R.id.txtSold);
 //        searchViewCTSP = findViewById(R.id.searchViewCTSP);
         btnMua = findViewById(R.id.btnMua);
+        notificationBadge= findViewById(R.id.slcart);
+        if(Server.listGioHang!=null){
+            int total=0;
+            for (int i=0; i<Server.listGioHang.size();i++){
+                total=total+Server.listGioHang.get(i).getSoLuong();
+            }
+            notificationBadge.setText(String.valueOf(total));
+        }
     }
 
     private void DialogGioHangCTSP(int gravity, int view) {
@@ -270,7 +281,7 @@ public class ChiTietSP extends AppCompatActivity {
                 public void onClick(View view) {
                     dialog.dismiss();
                     Toast.makeText(ChiTietSP.this, "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
-
+                    themGioHang();
                 }
             });
         }
@@ -388,6 +399,47 @@ public class ChiTietSP extends AppCompatActivity {
         setMauClick(imvMau4, txtMauChon);
 
 
+
+    }
+
+    private void themGioHang() {
+        if(Server.listGioHang.size()>0){
+            int soluong=Integer.parseInt(btnAmoutProduct.getText().toString());
+            boolean flag=false;
+            for (int i=0; i<Server.listGioHang.size();i++){
+                if(Server.listGioHang.get(i).getIdSP()==sp.getID()){
+                    Server.listGioHang.get(i).setSoLuong(soluong+Server.listGioHang.get(i).getSoLuong());
+                    Server.listGioHang.get(i).setGiaSP(sp.getGiaSP()*Server.listGioHang.get(i).getSoLuong());
+                    flag=true;
+                }
+            }
+            if(flag==false){
+                int gia= sp.getGiaSP()*soluong;
+                GioHang gioHang= new GioHang();
+                gioHang.setGiaSP(gia);
+                gioHang.setTenSP(sp.getTenSP());
+                gioHang.setIdSP(sp.getID());
+                gioHang.setSoLuong(soluong);
+                gioHang.setHinhSP(sp.getHinhAnhSP());
+                Server.listGioHang.add(gioHang);
+            }
+        }else {
+            int soluong=Integer.parseInt(btnAmoutProduct.getText().toString());
+            int gia= sp.getGiaSP()*soluong;
+            GioHang gioHang= new GioHang();
+            gioHang.setGiaSP(gia);
+            gioHang.setTenSP(sp.getTenSP());
+            gioHang.setIdSP(sp.getID());
+            gioHang.setSoLuong(soluong);
+            gioHang.setHinhSP(sp.getHinhAnhSP());
+            Server.listGioHang.add(gioHang);
+
+        }
+        int total=0;
+        for (int i=0; i<Server.listGioHang.size();i++){
+            total=total+Server.listGioHang.get(i).getSoLuong();
+        }
+        notificationBadge.setText(String.valueOf(total));
 
     }
 

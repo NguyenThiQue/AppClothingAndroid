@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.nex3z.notificationbadge.NotificationBadge;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +37,7 @@ public class SanPhamActivity extends AppCompatActivity {
     ImageView cartSP;
     ArrayList<SanPham> mangSP;
     SanPhamAdapter sanPhamAdapter;
+    NotificationBadge notificationBadge;
     int idLoai=0;
     String tenLoai="";
     @Override
@@ -44,9 +46,16 @@ public class SanPhamActivity extends AppCompatActivity {
         setContentView(R.layout.activity_san_pham);
         recyclerViewSanPham= findViewById(R.id.recyclerViewSanPham);
         toolbarLoai= findViewById(R.id.tenLoaiSP);
+        notificationBadge=findViewById(R.id.slcart);
         idLoai=getIntent().getIntExtra("idloaisanpham",-1);
         tenLoai=getIntent().getStringExtra("tenloaisanpham");
-        CheckConnection.ShowToast_Short(this, idLoai+"");
+        if(Server.listGioHang!=null){
+            int total=0;
+            for (int i=0; i<Server.listGioHang.size();i++){
+                total=total+Server.listGioHang.get(i).getSoLuong();
+            }
+            notificationBadge.setText(String.valueOf(total));
+        }
         setSupportActionBar(toolbarLoai);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbarLoai.setTitle(tenLoai);
@@ -58,22 +67,11 @@ public class SanPhamActivity extends AppCompatActivity {
         });
 
         mangSP= new ArrayList<>();
-        sanPhamAdapter = new SanPhamAdapter(getApplicationContext(), mangSP);
+        sanPhamAdapter = new SanPhamAdapter(getApplicationContext(), mangSP,R.layout.item_sanpham);
         recyclerViewSanPham.setHasFixedSize(true);
         recyclerViewSanPham.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         recyclerViewSanPham.setAdapter(sanPhamAdapter);
-//        if (CheckConnection.isConnected(this)) {
             DuLieuSanPham();
-//        } else {
-//            CheckConnection.ShowToast(this, "Bạn hãy kiểm tra lại kết nối Internet");
-//            finish();
-//        }
-
-//        if(server.listGioHang!=null){
-//            themGioHang();
-//        }else {
-//            server.listGioHang= new ArrayList<>();
-//        }
 
     }
 
@@ -152,7 +150,7 @@ public class SanPhamActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.cart:
                 CheckConnection.ShowToast_Short(this,"chọn cart");
-                Intent intent = new Intent(this, GioHang.class);
+                Intent intent = new Intent(this, GioHangActivity.class);
                 startActivity(intent);
                 break;
         }
