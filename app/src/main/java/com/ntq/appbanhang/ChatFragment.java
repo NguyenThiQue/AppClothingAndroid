@@ -40,7 +40,7 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.chat_fragment, container, false);
-//        db=FirebaseFirestore.getInstance();
+        db=FirebaseFirestore.getInstance();
         recyclerViewChat=view.findViewById(R.id.rcchat);
         imgSend=view.findViewById(R.id.imgchat);
         edtMess=view.findViewById(R.id.edtInputTex);

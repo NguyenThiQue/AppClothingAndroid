@@ -119,6 +119,12 @@ public class MainActivityDanhMucSP extends AppCompatActivity  implements Navigat
                     toolBar.setTitle("Chat");
                 }
                 break;
+            case R.id.nav_home:
+                if(currentFragment!=R.id.nav_chat){
+                    Intent intent = new Intent(MainActivityDanhMucSP.this, MainActivity.class);
+                    startActivity(intent);
+                }
+                break;
         }
         layoutMenu.closeDrawer(GravityCompat.START);
         return true;
