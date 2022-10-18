@@ -6,27 +6,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.widget.GridView;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
+import com.nex3z.notificationbadge.NotificationBadge;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class MainActivityDanhMucSP extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,6 +29,7 @@ public class MainActivityDanhMucSP extends AppCompatActivity  implements Navigat
     DrawerLayout layoutMenu;
     NavigationView navView;
     Toolbar toolBar;
+    NotificationBadge notificationBadge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +64,7 @@ public class MainActivityDanhMucSP extends AppCompatActivity  implements Navigat
         switch (item.getItemId()){
             case R.id.cart:
                 CheckConnection.ShowToast_Short(this,"chọn cart");
-                Intent intent = new Intent(MainActivityDanhMucSP.this, GioHang.class);
+                Intent intent = new Intent(MainActivityDanhMucSP.this, GioHangActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -93,6 +86,17 @@ public class MainActivityDanhMucSP extends AppCompatActivity  implements Navigat
         navView = findViewById(R.id.navView);
         toolBar = findViewById(R.id.toolBar);
         contentApp = findViewById(R.id.contentFrame);
+        notificationBadge=findViewById(R.id.slcart);
+        if(Server.listGioHang!=null){
+            int total=0;
+            for (int i=0; i<Server.listGioHang.size();i++){
+                total=total+Server.listGioHang.get(i).getSoLuong();
+            }
+            notificationBadge.setText(String.valueOf(total));
+        }
+        if(Server.listGioHang==null){
+            Server.listGioHang=new ArrayList<>();
+        }
 
     }
 

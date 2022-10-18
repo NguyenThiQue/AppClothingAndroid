@@ -27,12 +27,22 @@
 <!--            android:layout_height="wrap_content">-->
 
 <!--        </androidx.appcompat.widget.SearchView>-->
-        <Button
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="340dp"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/ic_baseline_shopping_cart_24"/>
+        <FrameLayout
+            android:id="@+id/framecart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="330dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_baseline_shopping_cart_24"/>
+            <com.nex3z.notificationbadge.NotificationBadge
+                android:id="@+id/slcart"
+                android:layout_marginLeft="360dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"/>
+        </FrameLayout>
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     <ScrollView

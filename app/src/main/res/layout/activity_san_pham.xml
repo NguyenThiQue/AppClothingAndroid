@@ -4,9 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.SanPhamActivity"
+    tools:context="SanPhamActivity"
     android:orientation="vertical">
 
+    <FrameLayout
+        android:id="@+id/framecart"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tenLoaiSP"
             android:paddingLeft="10dp"
@@ -19,6 +23,13 @@
             android:background="#F59A23"
             app:titleTextColor="@color/white"
             android:textStyle="bold" />
+        <com.nex3z.notificationbadge.NotificationBadge
+            android:id="@+id/slcart"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="360dp"
+            android:layout_width="23dp"
+            android:layout_height="23dp"/>
+    </FrameLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:paddingRight="15dp"
             android:background="#FDF3F4"

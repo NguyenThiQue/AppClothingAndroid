@@ -1,6 +1,9 @@
 package com.ntq.appbanhang;
+
+import java.util.List;
+
 public class Server {
-    public static String localhost = "192.168.1.12:8080";
+    public static String localhost = "192.168.1.13:8080";
     public static String duongdanLoaiSP = "http://" + localhost + "/server/getloaisanpham.php";
     public static String duongDanSPMoiNhat = "http://" + localhost + "/server/getsanphammoinhat.php";
     public static String feedback = "http://" + localhost + "/server/feedback.php";
@@ -11,8 +14,8 @@ public class Server {
     public static final String DATE="datetime";
     public static final String PATH_CHAT="chat";
     public static int user_current;
-    public  static String urlLoaiSP="http://"+localhost+"/server/getoaisanpham.php";
+    public  static String urlLoaiSP="http://"+localhost+"/server/getLoaiSanPham.php";
     public  static String urlSanPhamTheoLoai="http://"+localhost+"/server/getSPTheoLoai.php";
-
+    public static List<GioHang> listGioHang;
 
 }

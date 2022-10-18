@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,20 +24,22 @@ import java.util.ArrayList;
 public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.ItemHolder> implements Filterable {
 
     Context context;
+    int layout;
     ArrayList<SanPham> arrayListSanPham;
     ArrayList<SanPham> arrayListSanPhamSearch;
 
-    public SanPhamAdapter(Context context, ArrayList<SanPham> listProduct) {
+    public SanPhamAdapter(Context context, ArrayList<SanPham> listProduct, int layout) {
         this.context = context;
         this.arrayListSanPham = listProduct;
         this.arrayListSanPhamSearch = listProduct;
+        this.layout=layout;
     }
 
 
     @NonNull
     @Override
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.dong_sanpham_moinhat,null);
+        View v = LayoutInflater.from(parent.getContext()).inflate(layout,null);
         ItemHolder itemHolder = new ItemHolder(v);
         return itemHolder;
     }

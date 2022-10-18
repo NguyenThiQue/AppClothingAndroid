@@ -20,6 +20,15 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
+            android:name=".SanPhamActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GioHangActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DonHang"
+            android:exported="false" />
+        <activity
             android:name=".MainActivityDanhMucSP"
             android:exported="true">
             <intent-filter>
