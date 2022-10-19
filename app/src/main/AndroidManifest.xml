@@ -14,10 +14,10 @@
         android:theme="@style/Theme.AppBanHang"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ChiTietSP"
+            android:name=".MainActivityDanhMucSP"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ChiTietSP"
             android:exported="false" />
         <activity
             android:name=".SanPhamActivity"
@@ -29,7 +29,10 @@
             android:name=".DonHang"
             android:exported="false" />
         <activity
-            android:name=".MainActivityDanhMucSP"
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Clothing"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

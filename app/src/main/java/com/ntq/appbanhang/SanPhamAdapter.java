@@ -8,12 +8,16 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsoluteLayout;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.MarginLayoutParamsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -27,6 +31,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.ItemHold
     int layout;
     ArrayList<SanPham> arrayListSanPham;
     ArrayList<SanPham> arrayListSanPhamSearch;
+    int count = 0;
 
     public SanPhamAdapter(Context context, ArrayList<SanPham> listProduct, int layout) {
         this.context = context;
@@ -53,11 +58,9 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.ItemHold
         holder.txtGiaSP.setText(decimalFormat.format(product.getGiaSP()) + "Đ");
         holder.txtPriceSale.setText(decimalFormat.format(product.getGiaSale()) + "Đ");
         holder.txtPriceSale.setPaintFlags(holder.txtPriceSale.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-//        holder.txtSold.setText(product.getSold());
         Glide.with(context).load(product.getHinhAnhSP()).placeholder(R.drawable.account)
                 .error(R.drawable.cart)
                 .into(holder.imgHinhSanPham);
-//        holder.txtMoTaSP.setText(product.getMoTaSP());
         Glide.with(context).load(product.getStar1()).placeholder(R.drawable.account)
                 .error(R.drawable.cart)
                 .into(holder.imgStar1);
@@ -76,6 +79,8 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.ItemHold
         Glide.with(context).load(product.getHeart()).placeholder(R.drawable.account)
                 .error(R.drawable.cart)
                 .into(holder.imgHear);
+
+       ClickHeart(holder.imgHear);
 
         holder.setOnclickListener(new ItemOnclickListener() {
             @Override
@@ -129,10 +134,10 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.ItemHold
 
     //
     public class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public ImageView imgHinhSanPham;
-        public TextView txtTenSP, txtGiaSP, txtMoTaSP;
-        public ImageView imgStar1,imgStar2, imgStar3, imgStar4, imgStar5, imgHear;
-        public TextView txtPriceSale, txtSold;
+        private ImageView imgHinhSanPham;
+        private TextView txtTenSP, txtGiaSP, txtMoTaSP;
+        private ImageView imgStar1,imgStar2, imgStar3, imgStar4, imgStar5, imgHear;
+        private TextView txtPriceSale, txtSold;
         private ItemOnclickListener onclickListener;
 
         public ItemHolder(@NonNull View itemView) {
@@ -140,7 +145,6 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.ItemHold
             imgHinhSanPham = itemView.findViewById(R.id.imgHinh);
             txtTenSP = itemView.findViewById(R.id.txtName);
             txtGiaSP = itemView.findViewById(R.id.txtPrice);
-//            txtMoTaSP = itemView.findViewById(R.id.txtDes);
             imgStar1 = itemView.findViewById(R.id.star1);
             imgStar2 = itemView.findViewById(R.id.star2);
             imgStar3 = itemView.findViewById(R.id.star3);
@@ -149,7 +153,6 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.ItemHold
             imgHear = itemView.findViewById(R.id.heart);
             txtPriceSale = itemView.findViewById(R.id.txtPriceSale);
             itemView.setOnClickListener(this);
-//            txtSold = itemView.findViewById(R.id.txtSold);
         }
 
         public void setOnclickListener(ItemOnclickListener onclickListener) {
@@ -162,6 +165,28 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.ItemHold
         }
 
 
+    }
+
+    private void ClickHeart(ImageView imgHeart) {
+        imgHeart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(count % 2 != 0) {
+                    imgHeart.setImageResource(R.drawable.heart);
+                    imgHeart.setY(38);
+                    imgHeart.getLayoutParams().height = 70;
+                    imgHeart.getLayoutParams().width = 55;
+                }
+                else {
+                    imgHeart.setImageResource(R.drawable.heartred);
+                    imgHeart.setY(38);
+                    imgHeart.getLayoutParams().height = 80;
+                    imgHeart.getLayoutParams().width = 70;
+                }
+                count ++;
+            }
+        });
     }
 
 }

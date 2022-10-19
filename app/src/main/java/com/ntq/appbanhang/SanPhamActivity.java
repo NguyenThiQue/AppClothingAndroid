@@ -105,7 +105,7 @@ public class SanPhamActivity extends AppCompatActivity {
                             GiaSP = jsonObject.getInt("giasanpham");
                             GiaSPSale = jsonObject.getInt("pricesale");
                             HinhAnhSP = jsonObject.getString("hinhanhsanpham");
-                            MoTaSP = jsonObject.getString("moTasanpham");
+                            MoTaSP = jsonObject.getString("motasanpham");
                             Star1 = jsonObject.getString("star");
                             Star2 = jsonObject.getString("star");
                             Star3 = jsonObject.getString("star");

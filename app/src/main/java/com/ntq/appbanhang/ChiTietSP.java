@@ -62,7 +62,6 @@ public class ChiTietSP extends AppCompatActivity {
     SanPhamAdapter sanPhamAdapter;
     SanPham sp;
     Button btnBackCTSP,btnDecrease, btnIncrease, btnAmoutProduct, btnMua;
-    SearchView searchViewCTSP;
     int count =0;
     int heartCount = 0;
     int countClickSize = 0;
@@ -114,9 +113,14 @@ public class ChiTietSP extends AppCompatActivity {
                 heartCount ++;
                 if(heartCount % 2 == 0) {
                     imvhHearCTSP.setImageResource(R.drawable.heart);
+
                 }
                 else {
                     imvhHearCTSP.setImageResource(R.drawable.heartred);
+                    imvhHearCTSP.setX(470);
+                    imvhHearCTSP.setY(38);
+                    imvhHearCTSP.getLayoutParams().height = 70;
+                    imvhHearCTSP.getLayoutParams().width = 55;
                 }
             }
         });

@@ -1,16 +1,19 @@
 package com.ntq.appbanhang;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -38,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<SanPham> mangSP;
     SanPhamAdapter sanPhamAdapter;
     SearchView searchView;
+    ImageView imvRight, imvHeart;
+    CardView cardViewSpMoiNhat;
 
 
     @Override
@@ -47,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
         AnhXa();
         SearchViewClick();
+        clickRight();
+//        HeartClick();
 
         if(CheckConnection.haveNetworkConnection(getApplicationContext())) {
             ActionViewFlipper();
@@ -56,6 +63,26 @@ public class MainActivity extends AppCompatActivity {
             CheckConnection.ShowToast_Short(getApplicationContext(), "Bạn hãy kiểm tra lại kết nối internet");
             finish();
         }
+    }
+
+//    private void HeartClick() {
+//        imvHeart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                imvHeart.setImageResource(R.drawable.heartred);
+//            }
+//        });
+//    }
+
+    private void clickRight() {
+        imvRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MainActivityDanhMucSP.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void SearchViewClick() {
@@ -170,5 +197,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewManHinhChinh.setHasFixedSize(true);
         recyclerViewManHinhChinh.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         recyclerViewManHinhChinh.setAdapter(sanPhamAdapter);
+        imvRight = findViewById(R.id.imgRight);
+//        cardViewSpMoiNhat = recyclerViewManHinhChinh.findViewById(R.id.cardView);
+//        imvHeart = cardViewSpMoiNhat.findViewById(R.id.heart);
     }
 }

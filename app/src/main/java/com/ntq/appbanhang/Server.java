@@ -3,10 +3,8 @@ package com.ntq.appbanhang;
 import java.util.List;
 
 public class Server {
-    public static String localhost = "192.168.1.13:8080";
-    public static String duongdanLoaiSP = "http://" + localhost + "/server/getloaisanpham.php";
+    public static String localhost = "192.168.12.132:8080";
     public static String duongDanSPMoiNhat = "http://" + localhost + "/server/getsanphammoinhat.php";
-    public static String feedback = "http://" + localhost + "/server/feedback.php";
     public static String ID_NHAN="100";
     public static final String ID_SEND="idsend";
     public static final String ID_RECEIVE="received";

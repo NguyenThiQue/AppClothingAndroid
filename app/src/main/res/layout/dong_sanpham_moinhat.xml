@@ -59,12 +59,13 @@
 
 
                 <LinearLayout
+                    android:layout_marginLeft="4dp"
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
                    <LinearLayout
-                       android:paddingRight="50dp"
+                       android:paddingRight="20dp"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content">
                        <ImageView
@@ -95,12 +96,10 @@
                    </LinearLayout>
 
                     <ImageView
-
                         android:layout_width="40dp"
                         android:layout_height="50dp"
                         android:id="@+id/heart"
                         android:src="@drawable/heart"/>
-
 
                 </LinearLayout>
 
