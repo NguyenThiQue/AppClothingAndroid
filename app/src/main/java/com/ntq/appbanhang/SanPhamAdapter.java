@@ -3,6 +3,8 @@ package com.ntq.appbanhang;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.text.Layout;
 import android.view.LayoutInflater;
@@ -22,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -32,6 +35,19 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.ItemHold
     ArrayList<SanPham> arrayListSanPham;
     ArrayList<SanPham> arrayListSanPhamSearch;
     int count = 0;
+
+    int ID = 0;
+    String tenChiTiet = "";
+    Integer giaSPChiTiet = 0;
+    Integer giaSPSaleChiTiet = 0;
+    String hinhAnhSPChiTiet = "";
+    String MoTaSPChiTiet = "";
+    String Star1ChiTiet = "";
+    String Star2ChiTiet = "";
+    String Star3ChiTiet = "";
+    String Star4ChiTiet = "";
+    String Star5ChiTiet = "";
+    String HeartChiTiet = "";
 
     public SanPhamAdapter(Context context, ArrayList<SanPham> listProduct, int layout) {
         this.context = context;
@@ -53,6 +69,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.ItemHold
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
 
         SanPham product = arrayListSanPham.get(position);
+        ID = product.getID();
         holder.txtTenSP.setText(product.getTenSP());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         holder.txtGiaSP.setText(decimalFormat.format(product.getGiaSP()) + "Đ");
@@ -76,11 +93,14 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.ItemHold
         Glide.with(context).load(product.getStar5()).placeholder(R.drawable.account)
                 .error(R.drawable.cart)
                 .into(holder.imgStar5);
+
         Glide.with(context).load(product.getHeart()).placeholder(R.drawable.account)
                 .error(R.drawable.cart)
                 .into(holder.imgHear);
 
-       ClickHeart(holder.imgHear);
+        // ====================================== Click Heart =================================
+       ClickHeart(holder.imgHear, holder.imgHearEd, position, product.getID(), product.getTenSP(), product.getGiaSP(), product.getGiaSale(), product.getHinhAnhSP(), product.getStar1(), product.getStar2(), product.getStar3(), product.getStar4(), product.getStar5(), product.getHeart());
+
 
         holder.setOnclickListener(new ItemOnclickListener() {
             @Override
@@ -90,6 +110,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.ItemHold
                     intent.putExtra("chitiet", product);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
+
                 }
             }
         });
@@ -136,7 +157,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.ItemHold
     public class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView imgHinhSanPham;
         private TextView txtTenSP, txtGiaSP, txtMoTaSP;
-        private ImageView imgStar1,imgStar2, imgStar3, imgStar4, imgStar5, imgHear;
+        private ImageView imgStar1,imgStar2, imgStar3, imgStar4, imgStar5, imgHear, imgHearEd;
         private TextView txtPriceSale, txtSold;
         private ItemOnclickListener onclickListener;
 
@@ -167,24 +188,44 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.ItemHold
 
     }
 
-    private void ClickHeart(ImageView imgHeart) {
+    private void ClickHeart(ImageView imgHeart, ImageView imageViewHeartEd, int position, int ID, String ten, Integer gia, Integer giaSale, String hinhAnh, String star1, String star2, String star3, String star4, String star5, String heart) {
         imgHeart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if(count % 2 != 0) {
-                    imgHeart.setImageResource(R.drawable.heart);
-                    imgHeart.setY(38);
-                    imgHeart.getLayoutParams().height = 70;
-                    imgHeart.getLayoutParams().width = 55;
-                }
-                else {
-                    imgHeart.setImageResource(R.drawable.heartred);
-                    imgHeart.setY(38);
-                    imgHeart.getLayoutParams().height = 80;
-                    imgHeart.getLayoutParams().width = 70;
-                }
                 count ++;
+                if(count % 2 == 0) {
+                    imgHeart.setImageResource(R.drawable.heart);
+                    imgHeart.setY(5);
+                    imgHeart.getLayoutParams().height = 30;
+                    imgHeart.getLayoutParams().width = 40;
+                    for(int i = 0; i < MainActivity.heartArrayList.size(); i++) {
+                        if(MainActivity.heartArrayList.get(i).getID() == ID) {
+                            MainActivity.heartArrayList.remove(i);
+                        }
+                    }
+                }
+                else if(count % 2 != 0) {
+                    imgHeart.setImageResource(R.drawable.heartred);
+                    imgHeart.setY(5);
+                    imgHeart.getLayoutParams().height = 30;
+                    imgHeart.getLayoutParams().width = 40;
+
+                    if(MainActivity.heartArrayList.size()>=0) {
+                        boolean exit = false;
+                        for(int i = 0; i < MainActivity.heartArrayList.size(); i++) {
+                            if(MainActivity.heartArrayList.get(i).getID() == ID) {
+                                MainActivity.heartArrayList.remove(i);
+                                exit = true;
+                             }
+                        }
+                        if(exit == false) {
+                            MainActivity.heartArrayList.add(new Heart(ID, ten, gia, giaSale, hinhAnh, star1, star2, star3, star4, star5, heart));
+                        }
+                    }
+                    else {
+                        MainActivity.heartArrayList.add(new Heart(ID, ten, gia, giaSale, hinhAnh, star1, star2, star3, star4, star5, heart));
+                    }
+                }
             }
         });
     }

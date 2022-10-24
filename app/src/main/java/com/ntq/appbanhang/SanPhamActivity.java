@@ -2,6 +2,7 @@ package com.ntq.appbanhang;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,6 +49,7 @@ public class SanPhamActivity extends AppCompatActivity {
         toolbarLoai= findViewById(R.id.tenLoaiSP);
         notificationBadge=findViewById(R.id.slcart);
         idLoai=getIntent().getIntExtra("idloaisanpham",-1);
+        Log.d("a2",idLoai+"");
         tenLoai=getIntent().getStringExtra("tenloaisanpham");
         if(Server.listGioHang!=null){
             int total=0;
@@ -94,26 +96,38 @@ public class SanPhamActivity extends AppCompatActivity {
                     String Star4 = "";
                     String Star5 = "";
                     String Heart = "";
+                    String HeartEd = "";
                     int IdSP = 0;
                     if(response!=null){
                         try {
                             JSONArray jsonArray= new JSONArray(response);
+
                             for(int i = 0; i <jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                             ID = jsonObject.getInt("id");
+                                Log.d("a1", "vào1");
                             TenSP = jsonObject.getString("tensanpham");
+                                Log.d("a1", "vào2");
                             GiaSP = jsonObject.getInt("giasanpham");
+                                Log.d("a1", "vào3");
                             GiaSPSale = jsonObject.getInt("pricesale");
+                                Log.d("a1", "vào4");
                             HinhAnhSP = jsonObject.getString("hinhanhsanpham");
+                                Log.d("a1", "vào5");
                             MoTaSP = jsonObject.getString("motasanpham");
+                                Log.d("a1", "vào6");
                             Star1 = jsonObject.getString("star");
+                                Log.d("a1", "vào7");
                             Star2 = jsonObject.getString("star");
                             Star3 = jsonObject.getString("star");
                             Star4 = jsonObject.getString("star");
                             Star5 = jsonObject.getString("star");
                             Heart = jsonObject.getString("heart");
+                            HeartEd = jsonObject.getString("heared");
+                                Log.d("a1", "vào8");
                             IdSP = jsonObject.getInt("idsanpham");
-                            mangSP.add(new SanPham(ID, TenSP, GiaSPSale, GiaSP, HinhAnhSP, MoTaSP, Star1, Star2, Star3, Star4, Star5, Heart, IdSP));
+                            Log.d("a1", ID+TenSP+GiaSP);
+                            mangSP.add(new SanPham(ID, TenSP, GiaSPSale, GiaSP, HinhAnhSP, MoTaSP, Star1, Star2, Star3, Star4, Star5, Heart, HeartEd, IdSP));
                             sanPhamAdapter.notifyDataSetChanged();
                             }
                         }catch (JSONException e){

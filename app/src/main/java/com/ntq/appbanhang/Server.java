@@ -3,7 +3,7 @@ package com.ntq.appbanhang;
 import java.util.List;
 
 public class Server {
-    public static String localhost = "192.168.12.132:8080";
+    public static String localhost = "192.168.1.12:8080";
     public static String duongDanSPMoiNhat = "http://" + localhost + "/server/getsanphammoinhat.php";
     public static String ID_NHAN="100";
     public static final String ID_SEND="idsend";

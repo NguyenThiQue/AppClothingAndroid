@@ -37,11 +37,11 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/ic_baseline_shopping_cart_24"/>
-<!--            <com.nex3z.notificationbadge.NotificationBadge-->
-<!--                android:id="@+id/slcart"-->
-<!--                android:layout_marginLeft="360dp"-->
-<!--                android:layout_width="20dp"-->
-<!--                android:layout_height="20dp"/>-->
+            <com.nex3z.notificationbadge.NotificationBadge
+                android:id="@+id/slcart"
+                android:layout_marginLeft="360dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"/>
         </FrameLayout>
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
@@ -147,13 +147,6 @@
                             android:layout_height="50dp"
                             android:src="@drawable/start" />
                     </LinearLayout>
-
-                    <ImageView
-                        android:layout_marginTop="10dp"
-                        android:id="@+id/heartCTSP"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/heart" />
 
                     <TextView
                         android:id="@+id/txtSold"

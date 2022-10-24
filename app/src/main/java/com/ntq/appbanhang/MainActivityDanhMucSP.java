@@ -1,5 +1,9 @@
 package com.ntq.appbanhang;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,8 +11,11 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +34,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.internal.zzx;
 import com.nex3z.notificationbadge.NotificationBadge;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -42,6 +50,31 @@ public class MainActivityDanhMucSP extends AppCompatActivity  implements Navigat
     NotificationBadge notificationBadge;
     ImageView circleImageViewUser;
     TextView txtNameUser;
+
+    MyprofileFragment myprofileFragment = new MyprofileFragment();
+
+//    public static final int MY_REQUEST_CODE = 1;
+//    final private ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+//            new ActivityResultCallback<ActivityResult>() {
+//                @Override
+//                public void onActivityResult(ActivityResult result) {
+//                    if(result.getResultCode() == RESULT_OK) {
+//                        Intent intent = result.getData();
+//                        if(intent == null) {
+//                            return;
+//                        }
+//                        Uri uri = intent.getData();
+//                        myprofileFragment.setUri(uri);
+//                        //Xét ảnh lên MyprofileFragment
+//                        try {
+//                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+//                            myprofileFragment.SetBitmapImageView(bitmap);
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }
+//            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,10 +141,7 @@ public class MainActivityDanhMucSP extends AppCompatActivity  implements Navigat
             for (int i=0; i<Server.listGioHang.size();i++){
                 total=total+Server.listGioHang.get(i).getSoLuong();
             }
-            notificationBadge.setText(String.valueOf(total));
-        }
-        if(Server.listGioHang==null){
-            Server.listGioHang=new ArrayList<>();
+//            notificationBadge.setText(String.valueOf(total));
         }
 
     }
@@ -147,6 +177,11 @@ public class MainActivityDanhMucSP extends AppCompatActivity  implements Navigat
                 startActivity(intent);
                 finish();
                 break;
+            case R.id.nav_hoso:
+                if(currentFragment!=R.id.nav_hoso){
+                    replaceFragment(myprofileFragment);
+                    currentFragment = R.id.nav_hoso;
+                }
         }
         layoutMenu.closeDrawer(GravityCompat.START);
         return true;
@@ -159,7 +194,7 @@ public class MainActivityDanhMucSP extends AppCompatActivity  implements Navigat
 
     }
 
-    private void showUserInformation() {
+    public void showUserInformation() {
         //get đối tượng user từ Firebase trả về
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if(firebaseUser == null) {
@@ -171,11 +206,28 @@ public class MainActivityDanhMucSP extends AppCompatActivity  implements Navigat
             txtNameUser.setVisibility(View.GONE);
         }
         else {
-            txtNameUser.setVisibility(View.INVISIBLE);
+            txtNameUser.setVisibility(View.VISIBLE);
             txtNameUser.setText(name);
         }
         Glide.with(this).load(photoUrl).error(R.drawable.user_circle).into(circleImageViewUser);
     }
 
+//    //hàm người dùng cho phép hay từ chối
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        if(requestCode == MY_REQUEST_CODE) {
+//            // Nếu người dùng cho phép permission
+//            if(grantResults.length >0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                openGallery();
+//            }
+//        }
+//    }
 
+//    public void openGallery() {
+//        Intent intent = new Intent();
+//        intent.setType("image/*");
+//        intent.setAction(Intent.ACTION_GET_CONTENT);
+//        activityResultLauncher.launch(Intent.createChooser(intent, "chọn ảnh"));
+//    }
 }

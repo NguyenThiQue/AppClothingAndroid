@@ -67,6 +67,19 @@ public class ChiTietSP extends AppCompatActivity {
     int countClickSize = 0;
     int mauClick = 0;
 
+    int ID = 0;
+    String tenChiTiet = "";
+    Integer giaSPChiTiet = 0;
+    Integer giaSPSaleChiTiet = 0;
+    String hinhAnhSPChiTiet = "";
+    String MoTaSPChiTiet = "";
+    String Star1ChiTiet = "";
+    String Star2ChiTiet = "";
+    String Star3ChiTiet = "";
+    String Star4ChiTiet = "";
+    String Star5ChiTiet = "";
+    String HeartChiTiet = "";
+
 
     //=======================================================
 
@@ -80,8 +93,6 @@ public class ChiTietSP extends AppCompatActivity {
         setSeeMore();
         setBack();
         setAddGioHang();
-        setClickHeart();
-//        SearchProduct();
         setMuaHang();
     }
 
@@ -94,38 +105,6 @@ public class ChiTietSP extends AppCompatActivity {
         });
     }
 
-//    private void SearchProduct() {
-//        // =============================================== Search
-//
-//        searchViewCTSP.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                setContentView(R.layout.activity_main);
-//            }
-//        });
-//
-//    }
-
-    private void setClickHeart() {
-        imvhHearCTSP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                heartCount ++;
-                if(heartCount % 2 == 0) {
-                    imvhHearCTSP.setImageResource(R.drawable.heart);
-
-                }
-                else {
-                    imvhHearCTSP.setImageResource(R.drawable.heartred);
-                    imvhHearCTSP.setX(470);
-                    imvhHearCTSP.setY(38);
-                    imvhHearCTSP.getLayoutParams().height = 70;
-                    imvhHearCTSP.getLayoutParams().width = 55;
-                }
-            }
-        });
-
-    }
 
 
     private void setAddGioHang() {
@@ -156,18 +135,7 @@ public class ChiTietSP extends AppCompatActivity {
 
 
     private void GetDuLieu() {
-        int ID = 0;
-        String tenChiTiet = "";
-        Integer giaSPChiTiet = 0;
-        Integer giaSPSaleChiTiet = 0;
-        String hinhAnhSPChiTiet = "";
-        String MoTaSPChiTiet = "";
-        String Star1ChiTiet = "";
-        String Star2ChiTiet = "";
-        String Star3ChiTiet = "";
-        String Star4ChiTiet = "";
-        String Star5ChiTiet = "";
-        String HeartChiTiet = "";
+
         String Sold = "";
         int IdSP = 0;
         sp = (SanPham) getIntent().getSerializableExtra("chitiet");
@@ -217,10 +185,6 @@ public class ChiTietSP extends AppCompatActivity {
                 .placeholder(R.drawable.account)
                 .error(R.drawable.cart)
                 .into(imvStarCTSP5);
-        Glide.with(getApplicationContext()).load(HeartChiTiet)
-                .placeholder(R.drawable.account)
-                .error(R.drawable.cart)
-                .into(imvhHearCTSP);
 
     }
 
@@ -235,12 +199,10 @@ public class ChiTietSP extends AppCompatActivity {
         imvStarCTSP3 = findViewById(R.id.start3CTSP);
         imvStarCTSP4 = findViewById(R.id.start4CTSP);
         imvStarCTSP5 = findViewById(R.id.start5CTSP);
-        imvhHearCTSP = findViewById(R.id.heartCTSP);
         txtMota = findViewById(R.id.expandable_text);
         btnBackCTSP = findViewById(R.id.btnBackCTSP);
         imvbtnGioHang = findViewById(R.id.btnThemVaoGioHang);
         txtSold = findViewById(R.id.txtSold);
-//        searchViewCTSP = findViewById(R.id.searchViewCTSP);
         btnMua = findViewById(R.id.btnMua);
         notificationBadge= findViewById(R.id.slcart);
         if(Server.listGioHang!=null){

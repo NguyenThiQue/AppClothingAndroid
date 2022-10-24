@@ -100,6 +100,7 @@ public class Clothing extends AppCompatActivity {
         EditText edtPass = dialog.findViewById(R.id.edtPassword);
         Button btnLoginDialog = dialog.findViewById(R.id.btnLoginDialog);
         TextView txtRegis = dialog.findViewById(R.id.txtRegister);
+        TextView txtForgot = dialog.findViewById(R.id.txtForgot);
         btnLoginDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,6 +128,15 @@ public class Clothing extends AppCompatActivity {
 
             }
         });
+
+        // ========================= Quên mật khẩu =========================
+        txtForgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickForgotPassWord();
+            }
+        });
+
         dialog.show();
 
         txtRegis.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +146,23 @@ public class Clothing extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+    }
+
+    private void onClickForgotPassWord() {
+        progressDialog.show();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        String emailAddress = "n19dcpt056@student.ptithcm.edu.vn";
+
+        auth.sendPasswordResetEmail(emailAddress)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        progressDialog.dismiss();
+                        if (task.isSuccessful()) {
+                            Toast.makeText(Clothing.this, "Đã gửi email", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     private void setRegister() {

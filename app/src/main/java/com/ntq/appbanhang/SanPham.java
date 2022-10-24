@@ -11,6 +11,7 @@ public class SanPham implements Serializable {
     public String moTaSP;
     public String star1, star2, star3, star4, star5;
     public String heart;
+    public String heartEd;
     public String sold;
     public int IdSP;
     public String kho;
@@ -19,7 +20,7 @@ public class SanPham implements Serializable {
     public String mau3;
     public String mau4;
 
-    public SanPham(int ID, String tenSP, Integer giaSP, Integer giaSale, String hinhAnhSP, String moTaSP, String star1, String star2, String star3, String star4, String star5, String heart, int idSP) {
+    public SanPham(int ID, String tenSP, Integer giaSP, Integer giaSale, String hinhAnhSP, String moTaSP, String star1, String star2, String star3, String star4, String star5, String heart, String heartEd, int idSP) {
         this.ID = ID;
         this.tenSP = tenSP;
         this.giaSP = giaSP;
@@ -32,10 +33,11 @@ public class SanPham implements Serializable {
         this.star4 = star4;
         this.star5 = star5;
         this.heart = heart;
+        this.heartEd = heartEd;
         IdSP = idSP;
     }
 
-    public SanPham(int ID, String tenSP, Integer giaSP, Integer giaSale, String hinhAnhSP, String moTaSP, String star1, String star2, String star3, String star4, String star5, String heart, String sold, String kho, String mau1, String mau2, String mau3, String mau4, int idSP) {
+    public SanPham(int ID, String tenSP, Integer giaSP, Integer giaSale, String hinhAnhSP, String moTaSP, String star1, String star2, String star3, String star4, String star5, String heart, String heartEd, String sold, String kho, String mau1, String mau2, String mau3, String mau4, int idSP) {
         this.ID = ID;
         this.tenSP = tenSP;
         this.giaSP = giaSP;
@@ -48,6 +50,7 @@ public class SanPham implements Serializable {
         this.star4 = star4;
         this.star5 = star5;
         this.heart = heart;
+        this.heartEd = heartEd;
         this.sold = sold;
         this.kho = kho;
         this.mau1 = mau1;
@@ -207,6 +210,14 @@ public class SanPham implements Serializable {
 
     public void setMau4(String mau4) {
         this.mau4 = mau4;
+    }
+
+    public String getHeartEd() {
+        return heartEd;
+    }
+
+    public void setHeartEd(String heartEd) {
+        this.heartEd = heartEd;
     }
 }
 

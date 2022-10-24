@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     SearchView searchView;
     ImageView imvRight, imvHeart;
     CardView cardViewSpMoiNhat;
+    public static ArrayList<Heart> heartArrayList;
 
 
     @Override
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         AnhXa();
         SearchViewClick();
         clickRight();
-//        HeartClick();
+        HeartClick();
 
         if(CheckConnection.haveNetworkConnection(getApplicationContext())) {
             ActionViewFlipper();
@@ -65,14 +66,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//    private void HeartClick() {
-//        imvHeart.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                imvHeart.setImageResource(R.drawable.heartred);
-//            }
-//        });
-//    }
+    private void HeartClick() {
+        imvHeart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, HeartActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
 
     private void clickRight() {
         imvRight.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
                     String Star4 = "";
                     String Star5 = "";
                     String Heart = "";
+                    String HeartEd = "";
                     String Sold = "";
                     String Kho = "";
                     String Mau1 = "";
@@ -141,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
                             Star4 = jsonObject.getString("star");
                             Star5 = jsonObject.getString("star");
                             Heart = jsonObject.getString("heart");
+                            HeartEd = jsonObject.getString("heared");
                             Sold = jsonObject.getString("sold");
                             Kho = jsonObject.getString("warehouse");
                             Mau1 = jsonObject.getString("mau1");
@@ -148,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
                             Mau3 = jsonObject.getString("mau3");
                             Mau4 = jsonObject.getString("mau4");
                             IdSP = jsonObject.getInt("idsanpham");
-                            mangSP.add(new SanPham(ID, TenSP,  GiaSPSale, GiaSP, HinhAnhSP, MoTaSP, Star1, Star2 , Star3, Star4, Star5,Heart, Sold, Kho, Mau1, Mau2, Mau3, Mau4, IdSP));
+                            mangSP.add(new SanPham(ID, TenSP,  GiaSPSale, GiaSP, HinhAnhSP, MoTaSP, Star1, Star2 , Star3, Star4, Star5,Heart, HeartEd, Sold, Kho, Mau1, Mau2, Mau3, Mau4, IdSP));
                             sanPhamAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -198,7 +203,16 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewManHinhChinh.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         recyclerViewManHinhChinh.setAdapter(sanPhamAdapter);
         imvRight = findViewById(R.id.imgRight);
-//        cardViewSpMoiNhat = recyclerViewManHinhChinh.findViewById(R.id.cardView);
-//        imvHeart = cardViewSpMoiNhat.findViewById(R.id.heart);
+        imvHeart = findViewById(R.id.heartHome);
+       if(Server.listGioHang==null){
+            Server.listGioHang=new ArrayList<>();
+       }
+
+       if(heartArrayList != null) {
+
+       }
+       else {
+           heartArrayList = new ArrayList<>();
+       }
     }
 }

@@ -6,7 +6,7 @@
     android:paddingRight="5dp"
     android:background="#facd92"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="280dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -33,6 +33,8 @@
                     android:scaleType="centerCrop"/>
 
                 <TextView
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tên sản phẩm"
@@ -72,34 +74,36 @@
                            android:id="@+id/star1"
                            android:src="@drawable/start"
                            android:layout_width="20dp"
-                           android:layout_height="50dp"/>
+                           android:layout_height="20dp"/>
                        <ImageView
                            android:id="@+id/star2"
                            android:src="@drawable/start"
                            android:layout_width="20dp"
-                           android:layout_height="50dp"/>
+                           android:layout_height="20dp"/>
                        <ImageView
                            android:id="@+id/star3"
                            android:src="@drawable/start"
                            android:layout_width="20dp"
-                           android:layout_height="50dp"/>
+                           android:layout_height="20dp"/>
                        <ImageView
                            android:id="@+id/star4"
                            android:src="@drawable/start"
                            android:layout_width="20dp"
-                           android:layout_height="50dp"/>
+                           android:layout_height="20dp"/>
                        <ImageView
                            android:id="@+id/star5"
                            android:src="@drawable/start"
                            android:layout_width="20dp"
-                           android:layout_height="50dp"/>
+                           android:layout_height="20dp"/>
                    </LinearLayout>
 
                     <ImageView
+                        android:layout_marginTop="-6dp"
                         android:layout_width="40dp"
-                        android:layout_height="50dp"
+                        android:layout_height="30dp"
                         android:id="@+id/heart"
                         android:src="@drawable/heart"/>
+
 
                 </LinearLayout>
 
