@@ -198,8 +198,8 @@ public class MainActivity extends AppCompatActivity {
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             viewFlipper.addView(imageView);
         }
-        viewFlipper.setFlipInterval(5000);
-        viewFlipper.setAutoStart(true);
+        viewFlipper.setFlipInterval(5000);//thời gian chờ trước khi lật sang view tiếp theo
+        viewFlipper.setAutoStart(true);//lật giữa các view
         Animation animation_slide_in = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_in_right);
         Animation animation_slide_out = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_out_right);
         viewFlipper.setInAnimation(animation_slide_in);

@@ -124,16 +124,17 @@ public class Clothing extends AppCompatActivity {
                                 }
                             }
                         });
-                dialog.dismiss();
+//                dialog.dismiss();
 
             }
         });
 
-        // ========================= Quên mật khẩu =========================
+         //========================= Quên mật khẩu =========================
         txtForgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onClickForgotPassWord();
+                String email = edtMailSDT.getText().toString();
+                onClickForgotPassWord(email);
             }
         });
 
@@ -148,18 +149,16 @@ public class Clothing extends AppCompatActivity {
         });
     }
 
-    private void onClickForgotPassWord() {
+    private void onClickForgotPassWord(String email) {
         progressDialog.show();
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        String emailAddress = "n19dcpt056@student.ptithcm.edu.vn";
-
-        auth.sendPasswordResetEmail(emailAddress)
+        auth.sendPasswordResetEmail(email)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         progressDialog.dismiss();
                         if (task.isSuccessful()) {
-                            Toast.makeText(Clothing.this, "Đã gửi email", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Clothing.this, "Đã gửi mã. Vui lòng kiểm tra Email", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
