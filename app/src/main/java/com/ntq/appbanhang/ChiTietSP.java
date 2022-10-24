@@ -61,7 +61,7 @@ public class ChiTietSP extends AppCompatActivity {
     ArrayList<SanPham> mangSP;
     SanPhamAdapter sanPhamAdapter;
     SanPham sp;
-    Button btnBackCTSP,btnDecrease, btnIncrease, btnAmoutProduct, btnMua;
+    Button btnBackCTSP,btnDecrease, btnIncrease, btnAmoutProduct, btnMua, btnGioHang;
     int count =0;
     int heartCount = 0;
     int countClickSize = 0;
@@ -94,6 +94,7 @@ public class ChiTietSP extends AppCompatActivity {
         setBack();
         setAddGioHang();
         setMuaHang();
+        ClickGioHang();
     }
 
     private void setMuaHang() {
@@ -204,6 +205,7 @@ public class ChiTietSP extends AppCompatActivity {
         imvbtnGioHang = findViewById(R.id.btnThemVaoGioHang);
         txtSold = findViewById(R.id.txtSold);
         btnMua = findViewById(R.id.btnMua);
+        btnGioHang = findViewById(R.id.btnGioHang);
         notificationBadge= findViewById(R.id.slcart);
         if(Server.listGioHang!=null){
             int total=0;
@@ -212,6 +214,18 @@ public class ChiTietSP extends AppCompatActivity {
             }
             notificationBadge.setText(String.valueOf(total));
         }
+    }
+
+    private void ClickGioHang() {
+        btnGioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ChiTietSP.this, GioHangActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
     private void DialogGioHangCTSP(int gravity, int view) {
@@ -258,6 +272,10 @@ public class ChiTietSP extends AppCompatActivity {
                 public void onClick(View view) {
 
                     dialog.dismiss();
+                    themGioHang();
+                    Intent intent = new Intent(ChiTietSP.this, GioHangActivity.class);
+                    startActivity(intent);
+                    finish();
                     Toast.makeText(ChiTietSP.this, "Đi đến thanh toán", Toast.LENGTH_SHORT).show();
 
                 }

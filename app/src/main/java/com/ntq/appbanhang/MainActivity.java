@@ -1,10 +1,12 @@
 package com.ntq.appbanhang;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     SearchView searchView;
     ImageView imvRight, imvHeart;
     CardView cardViewSpMoiNhat;
+    ImageView btnCart;
     public static ArrayList<Heart> heartArrayList;
 
 
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         SearchViewClick();
         clickRight();
         HeartClick();
+        ClickCart();
 
         if(CheckConnection.haveNetworkConnection(getApplicationContext())) {
             ActionViewFlipper();
@@ -64,6 +68,17 @@ public class MainActivity extends AppCompatActivity {
             CheckConnection.ShowToast_Short(getApplicationContext(), "Bạn hãy kiểm tra lại kết nối internet");
             finish();
         }
+    }
+
+    private void ClickCart() {
+        btnCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, GioHangActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void HeartClick() {
@@ -204,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewManHinhChinh.setAdapter(sanPhamAdapter);
         imvRight = findViewById(R.id.imgRight);
         imvHeart = findViewById(R.id.heartHome);
+        btnCart = findViewById(R.id.btncart);
        if(Server.listGioHang==null){
             Server.listGioHang=new ArrayList<>();
        }
