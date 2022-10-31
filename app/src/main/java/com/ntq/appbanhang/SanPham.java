@@ -20,8 +20,7 @@ public class SanPham implements Serializable {
     public String mau3;
     public String mau4;
 
-    public SanPham(int ID, String tenSP, Integer giaSP, Integer giaSale, String hinhAnhSP, String moTaSP, String star1, String star2, String star3, String star4, String star5, String heart, String heartEd, int idSP) {
-        this.ID = ID;
+    public SanPham( String tenSP, Integer giaSP, Integer giaSale, String hinhAnhSP, String moTaSP, String star1, String star2, String star3, String star4, String star5, String heart, int idSP) {
         this.tenSP = tenSP;
         this.giaSP = giaSP;
         this.giaSale = giaSale;
@@ -33,8 +32,27 @@ public class SanPham implements Serializable {
         this.star4 = star4;
         this.star5 = star5;
         this.heart = heart;
-        this.heartEd = heartEd;
-        IdSP = idSP;
+        this.IdSP = idSP;
+    }
+
+    public SanPham(int ID,String tenSP, Integer giaSP, Integer giaSale, String hinhAnhSP, String moTaSP, String star1, String star2, String star3, String star4, String star5, String heart, String mau1, String mau2, String mau3, String mau4,int idSP) {
+        this.ID=ID;
+        this.tenSP = tenSP;
+        this.giaSP = giaSP;
+        this.giaSale = giaSale;
+        this.hinhAnhSP = hinhAnhSP;
+        this.moTaSP = moTaSP;
+        this.star1 = star1;
+        this.star2 = star2;
+        this.star3 = star3;
+        this.star4 = star4;
+        this.star5 = star5;
+        this.heart = heart;
+        this.IdSP = idSP;
+        this.mau1 = mau1;
+        this.mau2 = mau2;
+        this.mau3 = mau3;
+        this.mau4 = mau4;
     }
 
     public SanPham(int ID, String tenSP, Integer giaSP, Integer giaSale, String hinhAnhSP, String moTaSP, String star1, String star2, String star3, String star4, String star5, String heart, String heartEd, String sold, String kho, String mau1, String mau2, String mau3, String mau4, int idSP) {
@@ -57,7 +75,7 @@ public class SanPham implements Serializable {
         this.mau2 = mau2;
         this.mau3 = mau3;
         this.mau4 = mau4;
-        IdSP = idSP;
+        this.IdSP = idSP;
     }
 
     public int getID() {

@@ -61,8 +61,10 @@ public class ChiTietSP extends AppCompatActivity {
     ArrayList<SanPham> mangSP;
     SanPhamAdapter sanPhamAdapter;
     SanPham sp;
-    Button btnBackCTSP,btnDecrease, btnIncrease, btnAmoutProduct, btnMua, btnGioHang;
-    int count =0;
+
+    Button btnBackCTSP, btnDecrease, btnIncrease, btnAmoutProduct, btnMua, btnGioHang;
+
+    int count = 0;
     int heartCount = 0;
     int countClickSize = 0;
     int mauClick = 0;
@@ -80,10 +82,6 @@ public class ChiTietSP extends AppCompatActivity {
     String Star5ChiTiet = "";
     String HeartChiTiet = "";
 
-
-    //=======================================================
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +93,7 @@ public class ChiTietSP extends AppCompatActivity {
         setAddGioHang();
         setMuaHang();
         ClickGioHang();
+
     }
 
     private void setMuaHang() {
@@ -102,10 +101,10 @@ public class ChiTietSP extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 DialogGioHangCTSP(Gravity.BOTTOM, R.layout.mua_hang);
+                
             }
         });
     }
-
 
 
     private void setAddGioHang() {
@@ -134,7 +133,6 @@ public class ChiTietSP extends AppCompatActivity {
     }
 
 
-
     private void GetDuLieu() {
 
         String Sold = "";
@@ -159,7 +157,7 @@ public class ChiTietSP extends AppCompatActivity {
         txtGiaSPCT.setText(decimalFormat.format(giaSPChiTiet) + "Đ");
         txtGiaSaleSPCT.setText(decimalFormat.format(giaSPSaleChiTiet) + "Đ");
         txtGiaSaleSPCT.setPaintFlags(txtGiaSaleSPCT.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        txtSold.setText("Đã bán: " +Sold);
+        txtSold.setText("Đã bán: 4" );
         Glide.with(getApplicationContext()).load(hinhAnhSPChiTiet)
                 .placeholder(R.drawable.account)
                 .error(R.drawable.cart)
@@ -203,30 +201,22 @@ public class ChiTietSP extends AppCompatActivity {
         txtMota = findViewById(R.id.expandable_text);
         btnBackCTSP = findViewById(R.id.btnBackCTSP);
         imvbtnGioHang = findViewById(R.id.btnThemVaoGioHang);
+
         txtSold = findViewById(R.id.txtSold);
+
         btnMua = findViewById(R.id.btnMua);
         btnGioHang = findViewById(R.id.btnGioHang);
-        notificationBadge= findViewById(R.id.slcart);
-        if(Server.listGioHang!=null){
-            int total=0;
-            for (int i=0; i<Server.listGioHang.size();i++){
-                total=total+Server.listGioHang.get(i).getSoLuong();
+        notificationBadge = findViewById(R.id.slcart);
+        if (Server.listGioHang != null) {
+            int total = 0;
+            for (int i = 0; i < Server.listGioHang.size(); i++) {
+                total = total + Server.listGioHang.get(i).getSoLuong();
             }
             notificationBadge.setText(String.valueOf(total));
         }
-    }
-
-    private void ClickGioHang() {
-        btnGioHang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ChiTietSP.this, GioHangActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
     }
+
 
     private void DialogGioHangCTSP(int gravity, int view) {
         final Dialog dialog = new Dialog(this);
@@ -234,7 +224,7 @@ public class ChiTietSP extends AppCompatActivity {
         dialog.setContentView(view);
 
         Window window = dialog.getWindow();
-        if(window == null) {
+        if (window == null) {
             return;
         }
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -246,15 +236,14 @@ public class ChiTietSP extends AppCompatActivity {
         window.setAttributes(windowAtribute);
 
         //================= khi click ra ngoài diaolog sẽ tắt dialog =================
-        if(Gravity.BOTTOM == gravity) {
+        if (Gravity.BOTTOM == gravity) {
             dialog.setCancelable(true);
-        }
-        else{
+        } else {
             dialog.setCancelable(false);
         }
 
         // =====================================================
-        if(view == R.layout.gio_hang_chitiet_sp) {
+        if (view == R.layout.gio_hang_chitiet_sp) {
             Button btnAddSP = dialog.findViewById(R.id.btnAddSP);
             btnAddSP.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -264,25 +253,24 @@ public class ChiTietSP extends AppCompatActivity {
                     themGioHang();
                 }
             });
-        }
-        else if(view == R.layout.mua_hang) {
+        } else if (view == R.layout.mua_hang) {
             Button btnMuaHang = dialog.findViewById(R.id.btnAddMuaHang);
             btnMuaHang.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     dialog.dismiss();
-                    themGioHang();
-                    Intent intent = new Intent(ChiTietSP.this, GioHangActivity.class);
+                    Toast.makeText(ChiTietSP.this, "Đi đến thanh toán", Toast.LENGTH_SHORT).show();
+                    int soluongmua = Integer.parseInt(btnAmoutProduct.getText().toString());
+                    Server.listMuaHang.add(new GioHang(sp.getID(),sp.getTenSP(), sp.getGiaSP(), sp.getHinhAnhSP(), soluongmua));
+                    Intent intent = new Intent(ChiTietSP.this, DonHangActivity.class);
+                    long money = sp.getGiaSP() * soluongmua;
+                    intent.putExtra("tongtien", money);
                     startActivity(intent);
                     finish();
-                    Toast.makeText(ChiTietSP.this, "Đi đến thanh toán", Toast.LENGTH_SHORT).show();
 
                 }
             });
         }
-
-
 
         dialog.show();
         // ================== Tăng giảm số lượng mua sp ==================
@@ -292,11 +280,10 @@ public class ChiTietSP extends AppCompatActivity {
         btnDecrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if( count == 0) {
+                if (count == 0) {
                     count = 0;
-                }
-                else if(count >= 1){
-                    count = count -1;
+                } else if (count >= 1) {
+                    count = count - 1;
                 }
                 btnAmoutProduct.setText(count + "");
             }
@@ -304,7 +291,7 @@ public class ChiTietSP extends AppCompatActivity {
         btnIncrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                count = count +1;
+                count = count + 1;
                 btnAmoutProduct.setText(count + "");
             }
         });
@@ -319,7 +306,7 @@ public class ChiTietSP extends AppCompatActivity {
         String kho = "";
         TextView txtKho = dialog.findViewById(R.id.kho);
         kho = sp.getKho();
-        txtKho.setText("Kho: " + kho);
+        txtKho.setText("Kho: 10" );
 
         String hinhAnh = "";
         ImageView imvHinh = dialog.findViewById(R.id.imvHinh);
@@ -365,11 +352,10 @@ public class ChiTietSP extends AppCompatActivity {
         btnSize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                countClickSize ++;
-                if(countClickSize % 2 == 0) {
+                countClickSize++;
+                if (countClickSize % 2 == 0) {
                     btnSize.setBackgroundColor(Color.parseColor("#d4d4d4"));
-                }
-                else {
+                } else {
                     btnSize.setBackgroundColor(Color.parseColor("#facd92"));
                 }
             }
@@ -383,23 +369,22 @@ public class ChiTietSP extends AppCompatActivity {
         setMauClick(imvMau4, txtMauChon);
 
 
-
     }
 
     private void themGioHang() {
-        if(Server.listGioHang.size()>0){
-            int soluong=Integer.parseInt(btnAmoutProduct.getText().toString());
-            boolean flag=false;
-            for (int i=0; i<Server.listGioHang.size();i++){
-                if(Server.listGioHang.get(i).getIdSP()==sp.getID()){
-                    Server.listGioHang.get(i).setSoLuong(soluong+Server.listGioHang.get(i).getSoLuong());
-                    Server.listGioHang.get(i).setGiaSP(sp.getGiaSP()*Server.listGioHang.get(i).getSoLuong());
-                    flag=true;
+        if (Server.listGioHang.size() > 0) {
+            int soluong = Integer.parseInt(btnAmoutProduct.getText().toString());
+            boolean flag = false;
+            for (int i = 0; i < Server.listGioHang.size(); i++) {
+                if (Server.listGioHang.get(i).getIdSP() == sp.getID()) {
+                    Server.listGioHang.get(i).setSoLuong(soluong + Server.listGioHang.get(i).getSoLuong());
+                    Server.listGioHang.get(i).setGiaSP(sp.getGiaSP());
+                    flag = true;
                 }
             }
-            if(flag==false){
-                int gia= sp.getGiaSP()*soluong;
-                GioHang gioHang= new GioHang();
+            if (flag == false) {
+                int gia = sp.getGiaSP();
+                GioHang gioHang = new GioHang();
                 gioHang.setGiaSP(gia);
                 gioHang.setTenSP(sp.getTenSP());
                 gioHang.setIdSP(sp.getID());
@@ -407,10 +392,10 @@ public class ChiTietSP extends AppCompatActivity {
                 gioHang.setHinhSP(sp.getHinhAnhSP());
                 Server.listGioHang.add(gioHang);
             }
-        }else {
-            int soluong=Integer.parseInt(btnAmoutProduct.getText().toString());
-            int gia= sp.getGiaSP()*soluong;
-            GioHang gioHang= new GioHang();
+        } else {
+            int soluong = Integer.parseInt(btnAmoutProduct.getText().toString());
+            int gia = sp.getGiaSP();
+            GioHang gioHang = new GioHang();
             gioHang.setGiaSP(gia);
             gioHang.setTenSP(sp.getTenSP());
             gioHang.setIdSP(sp.getID());
@@ -419,9 +404,9 @@ public class ChiTietSP extends AppCompatActivity {
             Server.listGioHang.add(gioHang);
 
         }
-        int total=0;
-        for (int i=0; i<Server.listGioHang.size();i++){
-            total=total+Server.listGioHang.get(i).getSoLuong();
+        int total = 0;
+        for (int i = 0; i < Server.listGioHang.size(); i++) {
+            total = total + Server.listGioHang.get(i).getSoLuong();
         }
         notificationBadge.setText(String.valueOf(total));
 
@@ -433,13 +418,12 @@ public class ChiTietSP extends AppCompatActivity {
         imv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mauClick ++;
-                if(mauClick % 2 == 0) {
+                mauClick++;
+                if (mauClick % 2 == 0) {
                     txt.setText("Chưa có màu được chọn");
                     imv.setScaleX((xScale));
-                    imv.setScaleY((float) (ySacle ));
-                }
-                else {
+                    imv.setScaleY((float) (ySacle));
+                } else {
 
                     imv.setScaleX((float) (xScale + 0.5));
                     imv.setScaleY((float) (ySacle + 0.5));
@@ -452,4 +436,26 @@ public class ChiTietSP extends AppCompatActivity {
     // ==============================================================
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (Server.listGioHang != null) {
+            int total = 0;
+            for (int i = 0; i < Server.listGioHang.size(); i++) {
+                total = total + Server.listGioHang.get(i).getSoLuong();
+            }
+            notificationBadge.setText(String.valueOf(total));
+        }
+    }
+
+    private void ClickGioHang() {
+        btnGioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ChiTietSP.this, GioHangActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
 }

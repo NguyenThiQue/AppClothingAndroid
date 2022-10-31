@@ -15,7 +15,11 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+
+import android.util.Log;
+
 import android.provider.MediaStore;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -141,10 +145,14 @@ public class MainActivityDanhMucSP extends AppCompatActivity  implements Navigat
             for (int i=0; i<Server.listGioHang.size();i++){
                 total=total+Server.listGioHang.get(i).getSoLuong();
             }
+            notificationBadge.setText(String.valueOf(total));
+        }
+//        if(Server.listGioHang==null){
+//            Server.listGioHang=new ArrayList<>();
+//        }
 //            notificationBadge.setText(String.valueOf(total));
         }
 
-    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -171,6 +179,12 @@ public class MainActivityDanhMucSP extends AppCompatActivity  implements Navigat
                     startActivity(intent);
                 }
                 break;
+            case R.id.nav_donhang:
+                if(currentFragment!=R.id.nav_donhang){
+                    Intent intent = new Intent(MainActivityDanhMucSP.this, LichSuMuaActivity.class);
+                    startActivity(intent);
+                }
+                break;
             case R.id.nav_out:
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(this, Clothing.class);
@@ -181,6 +195,7 @@ public class MainActivityDanhMucSP extends AppCompatActivity  implements Navigat
                 if(currentFragment!=R.id.nav_hoso){
                     replaceFragment(myprofileFragment);
                     currentFragment = R.id.nav_hoso;
+                    toolBar.setTitle("Hồ sơ");
                 }
         }
         layoutMenu.closeDrawer(GravityCompat.START);
@@ -200,8 +215,8 @@ public class MainActivityDanhMucSP extends AppCompatActivity  implements Navigat
         if(firebaseUser == null) {
             return;
         }
-        String name = firebaseUser.getDisplayName();
-        Uri photoUrl = firebaseUser.getPhotoUrl();
+        String name = Server.firebaseUser.getDisplayName();
+        Uri photoUrl =Server.firebaseUser.getPhotoUrl();
         if(name == null) {
             txtNameUser.setVisibility(View.GONE);
         }

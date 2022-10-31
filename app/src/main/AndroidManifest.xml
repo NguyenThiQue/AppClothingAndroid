@@ -17,25 +17,10 @@
         android:theme="@style/Theme.AppBanHang"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".HeartActivity"
+            android:name=".LichSuMuaActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivityDanhMucSP"
-            android:exported="false" />
-        <activity
-            android:name=".ChiTietSP"
-            android:exported="false" />
-        <activity
-            android:name=".SanPhamActivity"
-            android:exported="false" />
-        <activity
-            android:name=".GioHangActivity"
-            android:exported="false" />
-        <activity
-            android:name=".DonHang"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".Clothing"
@@ -46,6 +31,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ChiTietSP"
+            android:exported="false" />
+        <activity
+            android:name=".DonHangActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SanPhamActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GioHangActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HeartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

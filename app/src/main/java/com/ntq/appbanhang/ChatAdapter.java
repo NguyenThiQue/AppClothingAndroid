@@ -75,7 +75,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        if (listChat.get(position).getIdsend().equals("1")){
+        if (listChat.get(position).getIdsend().equals(Server.firebaseUser.getEmail())){
             return TYPE_SEND;
         }else {
             return TYPE_RECEIVE;

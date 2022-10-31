@@ -51,6 +51,7 @@ public class SanPhamActivity extends AppCompatActivity {
         idLoai=getIntent().getIntExtra("idloaisanpham",-1);
         Log.d("a2",idLoai+"");
         tenLoai=getIntent().getStringExtra("tenloaisanpham");
+        CheckConnection.ShowToast_Short(getApplicationContext(),idLoai+"id");
         if(Server.listGioHang!=null){
             int total=0;
             for (int i=0; i<Server.listGioHang.size();i++){
@@ -60,25 +61,21 @@ public class SanPhamActivity extends AppCompatActivity {
         }
         setSupportActionBar(toolbarLoai);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbarLoai.setTitle(tenLoai);
+      //  toolbarLoai.setTitle(tenLoai+idLoai);
         toolbarLoai.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
-
         mangSP= new ArrayList<>();
         sanPhamAdapter = new SanPhamAdapter(getApplicationContext(), mangSP,R.layout.item_sanpham);
         recyclerViewSanPham.setHasFixedSize(true);
         recyclerViewSanPham.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         recyclerViewSanPham.setAdapter(sanPhamAdapter);
-            DuLieuSanPham();
-
+        DuLieuSanPham();
+        toolbarLoai.setTitle(tenLoai);
     }
-
-
-
     private void DuLieuSanPham() {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Server.urlSanPhamTheoLoai, new Response.Listener<String>() {
@@ -96,6 +93,12 @@ public class SanPhamActivity extends AppCompatActivity {
                     String Star4 = "";
                     String Star5 = "";
                     String Heart = "";
+                    String Sold = "";
+                    String Kho = "";
+                    String Mau1 = "";
+                    String Mau2 = "";
+                    String Mau3 = "";
+                    String Mau4 = "";
                     String HeartEd = "";
                     int IdSP = 0;
                     if(response!=null){
@@ -123,15 +126,21 @@ public class SanPhamActivity extends AppCompatActivity {
                             Star4 = jsonObject.getString("star");
                             Star5 = jsonObject.getString("star");
                             Heart = jsonObject.getString("heart");
-                            HeartEd = jsonObject.getString("heared");
-                                Log.d("a1", "vào8");
+                                Sold = jsonObject.getString("sold");
+                                Kho = jsonObject.getString("warehouse");
+                                Mau1 = jsonObject.getString("mau1");
+                                Mau2 = jsonObject.getString("mau2");
+                                Mau3 = jsonObject.getString("mau3");
+                                Mau4 = jsonObject.getString("mau4");
                             IdSP = jsonObject.getInt("idsanpham");
-                            Log.d("a1", ID+TenSP+GiaSP);
-                            mangSP.add(new SanPham(ID, TenSP, GiaSPSale, GiaSP, HinhAnhSP, MoTaSP, Star1, Star2, Star3, Star4, Star5, Heart, HeartEd, IdSP));
-                            sanPhamAdapter.notifyDataSetChanged();
+
+                            mangSP.add(new SanPham(ID,TenSP, GiaSPSale, GiaSP,HinhAnhSP,MoTaSP, Star1, Star2,Star3,Star4,Star5,Heart,Mau1,Mau2, Mau3, Mau4,IdSP));
+
                             }
+                            sanPhamAdapter.notifyDataSetChanged();
                         }catch (JSONException e){
                             e.printStackTrace();
+
                         }
 
                     }
@@ -139,7 +148,7 @@ public class SanPhamActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                CheckConnection.ShowToast_Short(getApplicationContext(),"lỗi"+error);
             }
         }) {
             @Nullable
@@ -170,19 +179,6 @@ public class SanPhamActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-//    public void themGioHang() {
-//        cartSP.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(server.listGioHang.size()>0){
-//
-//                }else {
-//                    int soluong=1;
-        //              int gia= Integer.parseInt(product)
-//                }
-//            }
-//        });
 
- //   }
 
 }

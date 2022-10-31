@@ -10,25 +10,37 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-        <LinearLayout
-            android:orientation="vertical"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <com.google.android.material.appbar.AppBarLayout
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            <FrameLayout
+                android:id="@+id/framecart"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-                <androidx.appcompat.widget.Toolbar
-                    android:layout_width="match_parent"
-                    android:layout_height="?actionBarSize"
-                    android:theme="@style/ThemeOverlay.AppCompat.Light"
-                    android:id="@+id/toolBar"
-                    app:titleTextColor="@color/white"
-                    android:backgroundTintMode="multiply"
-                    android:background="#F59A23"
-                    app:title="Danh mục sản phẩm" />
-            </com.google.android.material.appbar.AppBarLayout>
-            <!--<com.google.android.material.bottomnavigation.BottomNavigationView
+                android:layout_height="?actionBarSize">
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolBar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:background="#F59A23"
+                android:backgroundTintMode="multiply"
+                android:theme="@style/ThemeOverlay.AppCompat.Light"
+                app:title="Danh mục sản phẩm"
+                app:titleTextColor="@color/white" />
+                <com.nex3z.notificationbadge.NotificationBadge
+                    android:id="@+id/slcart"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginLeft="360dp"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"/>
+            </FrameLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+        <!--<com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottomNav"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
@@ -39,14 +51,13 @@
                 app:itemTextColor="@color/black"
                 app:menu="@menu/bottom_menu" />-->
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/contentFrame"/>
+        <FrameLayout
+            android:id="@+id/contentFrame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
 
-
-        </LinearLayout>
+    </LinearLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navView"
         android:layout_width="wrap_content"

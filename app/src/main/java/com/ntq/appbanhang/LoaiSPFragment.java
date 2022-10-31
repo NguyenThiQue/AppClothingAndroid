@@ -89,7 +89,6 @@ public class LoaiSPFragment extends Fragment {
 
     private void getDataLoaiSP() {
         RequestQueue requestQueue = Volley.newRequestQueue(this.getContext());
-        CheckConnection.ShowToast_Short(getContext(),"trong");
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, Server.urlLoaiSP, null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -100,8 +99,8 @@ public class LoaiSPFragment extends Fragment {
                                     JSONObject object = response.getJSONObject(i);
                                     listLoaiSP.add(new LoaiSanPham(
                                             object.getInt("id"),
-                                            object.getString("tenloai"),
-                                            object.getString("hinhloai")));
+                                            object.getString("tensanpham"),
+                                            object.getString("hinhanhloaisanpham")));
                                     adapterLoai.notifyDataSetChanged();
                                 } catch (JSONException e) {
                                     e.printStackTrace();

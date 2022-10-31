@@ -10,7 +10,7 @@
         android:background="#f59d2a"
         app:title="Sản phẩm yêu thích"
         android:id="@+id/toolBarHeart"
-        app:titleTextColor="#ec8094"
+        app:titleTextColor="#fff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

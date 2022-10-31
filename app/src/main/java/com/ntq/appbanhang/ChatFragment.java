@@ -2,6 +2,7 @@ package com.ntq.appbanhang;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +68,7 @@ public class ChatFragment extends Fragment {
 
         }else {
             HashMap<String,Object> message= new HashMap<>();
-            message.put(Server.ID_SEND, String.valueOf(1));
+            message.put(Server.ID_SEND, String.valueOf(Server.firebaseUser.getEmail()));
             message.put(Server.ID_RECEIVE, Server.ID_NHAN);
             message.put(Server.MESS, messs);
             message.put(Server.DATE, new Date());
@@ -109,7 +110,7 @@ public class ChatFragment extends Fragment {
                         }
                         adapter.notifyDataSetChanged();
                         adapter.notifyItemRangeInserted(list.size(), list.size());
-                        recyclerViewChat.smoothScrollToPosition(list.size() - 1);
+                       // recyclerViewChat.smoothScrollToPosition(list.size() - 1);
                     }
 
                 }

@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/tron"
-    android:layout_marginBottom="5dp">
+    android:layout_marginBottom="7dp"
+    android:paddingBottom="5dp">
     <CheckBox
         android:id="@+id/checkbox"
         android:layout_gravity="center"
@@ -19,55 +20,53 @@
         android:layout_width="90dp"
         android:layout_height="90dp"/>
    <LinearLayout
+       android:layout_gravity="center"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:orientation="vertical">
        <TextView
+           android:layout_marginBottom="8dp"
            android:id="@+id/txtTenGio"
-           android:textSize="18sp"
+           android:textSize="16sp"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="Mặt nạ Dưỡng ẩm kiềm dầu 7 ngày"/>
-       <Spinner
-           android:id="@+id/phanloaiGio"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"/>
        <TextView
            android:id="@+id/txtGiaGio"
-           android:textSize="18sp"
+           android:textSize="15sp"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="200.000vnd"/>
        <LinearLayout
-           android:layout_marginTop="10dp"
+           android:layout_marginTop="2dp"
            android:gravity="center"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:orientation="horizontal">
            <Button
                android:id="@+id/btntang"
-               android:layout_width="40dp"
-               android:layout_height="40dp"
+               android:layout_width="30dp"
+               android:layout_height="30dp"
                android:textColor="@color/white"
                android:textStyle="bold"
                android:backgroundTint="#F59A23"
                android:text="+"
-               android:textSize="15sp"
+               android:textSize="10sp"
                />
            <TextView
                android:id="@+id/txtsl"
                android:layout_width="70dp"
                android:layout_height="30dp"
                android:text="1"
-               android:textSize="25sp"
+               android:textSize="20sp"
                android:gravity="center"
                android:textStyle="bold"/>
            <Button
                android:id="@+id/btngiam"
                android:textColor="@color/white"
-               android:layout_width="40dp"
-               android:layout_height="40dp"
-               android:textSize="20sp"
+               android:layout_width="30dp"
+               android:layout_height="30dp"
+               android:textSize="10sp"
                android:textStyle="bold"
                android:text="-"
                android:backgroundTint="#F59A23"

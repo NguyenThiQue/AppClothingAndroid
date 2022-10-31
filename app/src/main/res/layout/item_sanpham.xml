@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:paddingBottom="10dp"
+    android:paddingBottom="5dp"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-
+        android:padding="10dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
 
         android:id="@+id/cardView"
         app:cardCornerRadius="10dp"
@@ -21,7 +21,7 @@
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:paddingBottom="5dp"
+                android:padding="10dp"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -73,27 +73,27 @@
                         <ImageView
                             android:layout_marginLeft="2dp"
                             android:id="@+id/star1"
-                            android:src="@drawable/ic_baseline_person_24"
+                            android:src="@drawable/start"
                             android:layout_width="20dp"
                             android:layout_height="30dp"/>
                         <ImageView
                             android:id="@+id/star2"
-                            android:src="@drawable/ic_baseline_person_24"
+                            android:src="@drawable/start"
                             android:layout_width="20dp"
                             android:layout_height="30dp"/>
                         <ImageView
                             android:id="@+id/star3"
-                            android:src="@drawable/ic_baseline_person_24"
+                            android:src="@drawable/start"
                             android:layout_width="20dp"
                             android:layout_height="30dp"/>
                         <ImageView
                             android:id="@+id/star4"
-                            android:src="@drawable/ic_baseline_person_24"
+                            android:src="@drawable/start"
                             android:layout_width="20dp"
                             android:layout_height="30dp"/>
                         <ImageView
                             android:id="@+id/star5"
-                            android:src="@drawable/ic_baseline_person_24"
+                            android:src="@drawable/start"
                             android:layout_width="20dp"
                             android:layout_height="30dp"/>
                     </LinearLayout>
@@ -103,7 +103,7 @@
                         android:layout_height="30dp"
                         android:id="@+id/heart"
                         android:layout_marginRight="2dp"
-                        android:src="@drawable/ic_baseline_assignment_24"/>
+                        android:src="@drawable/heart"/>
 
                 </LinearLayout>
 

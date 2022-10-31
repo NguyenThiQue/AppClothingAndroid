@@ -20,67 +20,12 @@
         android:textStyle="bold" />
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp">
-        <LinearLayout
-            android:padding="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="20dp"
-                    android:layout_margin="20dp" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Địa điểm giao hàng:"/>
-
-                    <EditText
-                        android:textSize="12sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="588/3/2 Lê Thánh Tông, phường 3, quận 4, thành phố Hồ Chí Minh"/>
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <EditText
-                android:paddingVertical="5dp"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:textSize="12sp"
-                android:background="@drawable/tron"
-                android:hint="Thêm ghi chú khi giao hàng"/>
-        </LinearLayout>
-
-
-
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="20dp"
         android:layout_margin="10dp">
 
         <LinearLayout
-            android:padding="15dp"
+            android:padding="10dp"
             android:weightSum="10"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -90,6 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textSize="14sp"
                 android:text="Vui lòng tích chọn sản phẩm muốn mua"/>
             <LinearLayout
                 android:layout_weight="9"

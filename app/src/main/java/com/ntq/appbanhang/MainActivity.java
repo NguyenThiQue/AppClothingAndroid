@@ -9,7 +9,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,8 +40,10 @@ public class MainActivity extends AppCompatActivity {
     ViewFlipper viewFlipper;
     RecyclerView recyclerViewManHinhChinh;
     ArrayList<SanPham> mangSP;
+    ImageView imgRight;
     SanPhamAdapter sanPhamAdapter;
     SearchView searchView;
+
     ImageView imvRight, imvHeart;
     CardView cardViewSpMoiNhat;
     ImageView btnCart;
@@ -55,10 +56,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         AnhXa();
+        if(Server.listGioHang==null){
+            Server.listGioHang=new ArrayList<>();
+        }
+        imgRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(getApplicationContext(),MainActivityDanhMucSP.class);
+                startActivity(intent);
+            }
+        });
         SearchViewClick();
+
         clickRight();
         HeartClick();
         ClickCart();
+
 
         if(CheckConnection.haveNetworkConnection(getApplicationContext())) {
             ActionViewFlipper();
@@ -160,15 +173,16 @@ public class MainActivity extends AppCompatActivity {
                             Star4 = jsonObject.getString("star");
                             Star5 = jsonObject.getString("star");
                             Heart = jsonObject.getString("heart");
-                            HeartEd = jsonObject.getString("heared");
-                            Sold = jsonObject.getString("sold");
-                            Kho = jsonObject.getString("warehouse");
+                            //HeartEd = jsonObject.getString("heared");
+                            //Sold = jsonObject.getString("sold");
+                           // Kho = jsonObject.getString("warehouse");
                             Mau1 = jsonObject.getString("mau1");
                             Mau2 = jsonObject.getString("mau2");
                             Mau3 = jsonObject.getString("mau3");
                             Mau4 = jsonObject.getString("mau4");
                             IdSP = jsonObject.getInt("idsanpham");
-                            mangSP.add(new SanPham(ID, TenSP,  GiaSPSale, GiaSP, HinhAnhSP, MoTaSP, Star1, Star2 , Star3, Star4, Star5,Heart, HeartEd, Sold, Kho, Mau1, Mau2, Mau3, Mau4, IdSP));
+                            //mangSP.add(new SanPham(ID, TenSP,  GiaSPSale, GiaSP, HinhAnhSP, MoTaSP, Star1, Star2 , Star3, Star4, Star5,Heart, HeartEd, Sold, Kho, Mau1, Mau2, Mau3, Mau4, IdSP));
+                            mangSP.add(new SanPham(ID,TenSP,GiaSPSale, GiaSP,HinhAnhSP,MoTaSP, Star1, Star2,Star3,Star4,Star5,Heart,Mau1,Mau2, Mau3, Mau4,IdSP));
                             sanPhamAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -211,6 +225,7 @@ public class MainActivity extends AppCompatActivity {
         viewFlipper = findViewById(R.id.viewFlipper);
         recyclerViewManHinhChinh = findViewById(R.id.recyclerView);
         searchView = findViewById(R.id.searchView);
+        imgRight=findViewById(R.id.imgRight);
         searchView.setQueryHint("Tìm kiếm sản phẩm");
         mangSP = new ArrayList<>();
         sanPhamAdapter=new SanPhamAdapter(getApplicationContext(), mangSP,R.layout.dong_sanpham_moinhat);

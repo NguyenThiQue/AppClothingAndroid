@@ -11,6 +11,14 @@ public class GioHang {
     public GioHang() {
     }
 
+    public GioHang(int idSP, String tenSP, int giaSP, String hinhSP, int soLuong) {
+        this.idSP = idSP;
+        this.tenSP = tenSP;
+        this.giaSP = giaSP;
+        this.hinhSP = hinhSP;
+        this.soLuong = soLuong;
+    }
+
     public int getIdSP() {
         return idSP;
     }
